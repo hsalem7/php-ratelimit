@@ -12,7 +12,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Hsalem7\\PhpRateLimit\\": "tests/"
+            "Hsalem7\\PhpRateLimit\\Tests\\": "tests/"
         }
     },
     "license": "GNU General Public License v3.0",
