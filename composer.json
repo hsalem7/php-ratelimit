@@ -1,0 +1,15 @@
+{
+    "name": "applepc/php-ratelimit",
+    "description": "Php library for rate limiting",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^9.1"
+    },
+    "license": "GNU General Public License v3.0",
+    "authors": [
+        {
+            "name": "Hassan Salem",
+            "email": "h.salem7788@gmail.com"
+        }
+    ]
+}
