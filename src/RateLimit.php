@@ -4,7 +4,7 @@ namespace Hsalem7\PhpRateLimit;
 
 use Hsalem7\PhpRateLimit\Stores\StoreInterface;
 
-class PhpRateLimit
+class RateLimit
 {
     /** @var StoreInterface */
     private $store;

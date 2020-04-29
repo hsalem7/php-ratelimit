@@ -1,7 +1,7 @@
 <?php
 
 use Hsalem7\PhpRateLimit\Clock;
-use Hsalem7\PhpRateLimit\PhpRateLimit;
+use Hsalem7\PhpRateLimit\RateLimit;
 use Hsalem7\PhpRateLimit\Stores\StoreInterface;
 use PHPUnit\Framework\TestCase;
 
@@ -13,7 +13,7 @@ class PhpRateLimitTests extends TestCase
         $store->method('get')->with("key:time")->willReturn(0);
         $clock = $this->createMock(Clock::class);
         $clock->method('currentTime')->willReturn(61);
-        $sut = new PhpRateLimit($store, $clock);
+        $sut = new RateLimit($store, $clock);
 
         $this->assertTrue($sut->attempt('key', 1, 60));
     }
@@ -32,7 +32,7 @@ class PhpRateLimitTests extends TestCase
                 [$this->equalTo('key:count'), $this->equalTo(1)]
             );
 
-        $sut = new PhpRateLimit($store, $clock);
+        $sut = new RateLimit($store, $clock);
         $sut->attempt('key', 1, 60);
     }
 
@@ -46,7 +46,7 @@ class PhpRateLimitTests extends TestCase
         });
         $clock = $this->createMock(Clock::class);
         $clock->method('currentTime')->willReturn(50);
-        $sut = new PhpRateLimit($store, $clock);
+        $sut = new RateLimit($store, $clock);
 
         $this->assertTrue($sut->attempt('key', 1, 60));
     }
@@ -64,7 +64,7 @@ class PhpRateLimitTests extends TestCase
 
         $store->expects($this->once())->method('set')->with('key:count', 1);
 
-        $sut = new PhpRateLimit($store, $clock);
+        $sut = new RateLimit($store, $clock);
         $sut->attempt('key', 1, 60);
     }
 
@@ -77,7 +77,7 @@ class PhpRateLimitTests extends TestCase
         });
         $clock = $this->createMock(Clock::class);
         $clock->method('currentTime')->willReturn(50);
-        $sut = new PhpRateLimit($store, $clock);
+        $sut = new RateLimit($store, $clock);
 
         $this->assertFalse($sut->attempt('key', 1, 60));
     }
@@ -91,7 +91,7 @@ class PhpRateLimitTests extends TestCase
         });
         $clock = $this->createMock(Clock::class);
         $clock->method('currentTime')->willReturn(100);
-        $sut = new PhpRateLimit($store, $clock);
+        $sut = new RateLimit($store, $clock);
 
         $this->assertEquals(5, $sut->getRemainingAttempts('key', 5, 60));
     }
@@ -105,7 +105,7 @@ class PhpRateLimitTests extends TestCase
         });
         $clock = $this->createMock(Clock::class);
         $clock->method('currentTime')->willReturn(50);
-        $sut = new PhpRateLimit($store, $clock);
+        $sut = new RateLimit($store, $clock);
 
         $this->assertEquals(3, $sut->getRemainingAttempts('key', 5, 60));
     }
